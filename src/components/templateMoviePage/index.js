@@ -7,6 +7,9 @@ import GridListTile from "@material-ui/core/GridListTile";
 import { getMovieImages } from "../../api/tmdb-api";
 
 const useStyles = makeStyles((theme) => ({
+   root: {
+    paddingTop: theme.spacing(7),
+  },
   gridListRoot: {
     display: "flex",
     flexWrap: "wrap",
@@ -16,9 +19,7 @@ const useStyles = makeStyles((theme) => ({
     width: 450,
     height: '100vh',
   },
-  root: {
-    paddingTop: theme.spacing(7),
-  },
+ 
 }));
 
 const TemplateMoviePage = ({ movie, children }) => {
@@ -33,7 +34,7 @@ const TemplateMoviePage = ({ movie, children }) => {
   }, []);
 
   return (
-    <> <div className={classes.root}>
+    <div className={classes.root}>
        
       <MovieHeader movie={movie} />
 
@@ -57,7 +58,7 @@ const TemplateMoviePage = ({ movie, children }) => {
           {children}
         </Grid>
       </Grid>
-      </div></>
+      </div>
   );
 };
 
