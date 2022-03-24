@@ -22,6 +22,7 @@ const queryClient = new QueryClient({
 
 const App = () => {
   return (
+    <QueryClientProvider client={queryClient}>
       <BrowserRouter>
           <SiteHeader />      {/* New Header  */}
           <Switch>
@@ -34,7 +35,9 @@ const App = () => {
         <Redirect from="*" to="/" />
         
       </Switch>
-    </BrowserRouter>
+      </BrowserRouter>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
   );
 };
 
