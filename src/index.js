@@ -1,3 +1,4 @@
+import AddMovieReviewPage from './pages/addMovieReviewPage'
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Redirect, Switch} from "react-router-dom";
@@ -28,7 +29,7 @@ const App = () => {
         <SiteHeader />
         <MoviesContextProvider>
             <Switch>
-        
+        <Route exact path="/reviews/form" component={AddMovieReviewPage} />
         <Route exact path="/movies/favourites" component={FavouriteMoviesPage} />
         <Route path="/movies/:id" component={MoviePage} />
         <Route path="/reviews/:id" component={MovieReviewPage} />
