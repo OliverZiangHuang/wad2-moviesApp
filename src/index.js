@@ -3,6 +3,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Redirect, Switch} from "react-router-dom";
 import HomePage from "./pages/homePage";
+import upcomingpage from "./pages/upcomingpage";
 import MoviePage from "./pages/movieDetailsPage";
 import FavouriteMoviesPage from "./pages/favoriteMoviesPage"; // NEW
 import MovieReviewPage from "./pages/movieReviewPage";
@@ -31,6 +32,7 @@ const App = () => {
             <Switch>
         <Route exact path="/reviews/form" component={AddMovieReviewPage} />
         <Route exact path="/movies/favourites" component={FavouriteMoviesPage} />
+        <Route exact path="/movies/upcoming" component={upcomingpage} />
         <Route path="/movies/:id" component={MoviePage} />
         <Route path="/reviews/:id" component={MovieReviewPage} />
         <Route exact path="/" component={HomePage} />
