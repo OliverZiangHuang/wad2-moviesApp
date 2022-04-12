@@ -3,7 +3,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Redirect, Switch} from "react-router-dom";
 import HomePage from "./pages/homePage";
-import upcomingpage from "./pages/upcomingpage";
+import upcomingpage from "./pages/upcomingpage"; //new done 
 import MoviePage from "./pages/movieDetailsPage";
 import FavouriteMoviesPage from "./pages/favoriteMoviesPage"; // NEW
 import MovieReviewPage from "./pages/movieReviewPage";
@@ -11,6 +11,7 @@ import SiteHeader from './components/siteHeader';
 import { QueryClientProvider, QueryClient } from "react-query";
 import { ReactQueryDevtools } from 'react-query/devtools'
 import MoviesContextProvider from "./contexts/moviesContext";
+import Topratedpage from './pages/topratedMoivesPage';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -32,7 +33,9 @@ const App = () => {
             <Switch>
         <Route exact path="/reviews/form" component={AddMovieReviewPage} />
         <Route exact path="/movies/favourites" component={FavouriteMoviesPage} />
-        <Route exact path="/movies/upcoming" component={upcomingpage} />
+        <Route exact path="/movies/upcoming" component={upcomingpage} />  
+        <Route exact path="/movies/toprated" component={Topratedpage} />  
+
         <Route path="/movies/:id" component={MoviePage} />
         <Route path="/reviews/:id" component={MovieReviewPage} />
         <Route exact path="/" component={HomePage} />

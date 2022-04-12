@@ -87,7 +87,7 @@ export const getMovie = (args) => {
     });
   };
     //moive publish date get api
-  export const getPublishdate = () => {
+  export const getPublishdate = (id) => {
     return fetch(
       `https://api.themoviedb.org/3/movie/${id}/release_dates?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=1`
     ).then((response) => {
