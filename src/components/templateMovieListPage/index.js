@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: theme.spacing(7),
   }
 }));
-
+//title = page name
 function MovieListPageTemplate({ movies, title, action }) {
 
   const classes = useStyles();

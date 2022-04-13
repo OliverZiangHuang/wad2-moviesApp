@@ -1,7 +1,8 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import MovieDetails from "../components/movieDetails";
-import PageTemplate from "../components/templateMoviePage";
+import PageTemplate from "../components/templateMoviePage";//here to ajust postions
+import TemplateMovieActorsPage from "../components/templateMoiveActorsPage";
 import useMovie from "../hooks/useMovie";
 import { getMovie } from '../api/tmdb-api'
 import { useQuery } from "react-query";
@@ -30,8 +31,11 @@ const MovieDetailsPage = (props) => {
       {movie ? (
         <>
           <PageTemplate movie={movie}>
-            <MovieDetails movie={movie} />
-          </PageTemplate>
+            <MovieDetails movie={movie}>    
+            </MovieDetails>
+          </PageTemplate> 
+          <TemplateMovieActorsPage movie={movie}>
+          </TemplateMovieActorsPage>
         </>
       ) : (
         <p>Waiting for movie details</p>
