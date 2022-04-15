@@ -7,6 +7,7 @@ import GridListTile from "@material-ui/core/GridListTile";
 import { getMoiveActors } from "../../api/tmdb-api";
 import { useQuery } from "react-query";
 import Spinner from '../spinner'
+import Link from "react-scroll/modules/components/Link";
 
 const useStyles = makeStyles((theme) => ({
    root: {
@@ -59,16 +60,16 @@ const TemplateMovieActorsPage = ({ movie, children }) => {
       <Grid movie={movie} container spacing={10} style={{ padding: "15px" }}>
         <Grid item xs={10}>
           <div className={classes.gridListRoot}>
-            <GridList cellHeight={500} className={classes.gridList} cols={15} >
+            <GridList cellHeight={500} className={classes.gridList} cols={7} >
               {credits.map((image) => (
-                <GridListTile key={image.profile_path} className={classes.gridListTile} cols={3}>
-                  <img
-                    src={`https://image.tmdb.org/t/p/w500/${image.profile_path}`}
+                 <div> <GridListTile key={image.profile_path} className={classes.gridListTile} cols={3}>
+                    <img
+                    src={`https://image.tmdb.org/t/p/w300/${image.profile_path}`}
                     alt={image.profile_path}
-                  />
-                
-
+                  />    
                 </GridListTile>
+                <a href=""> {`${image.name}`} </a>
+                 </div> 
               ))}
             </GridList>
           </div>
