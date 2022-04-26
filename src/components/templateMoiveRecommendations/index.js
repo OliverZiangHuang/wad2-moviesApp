@@ -4,7 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
-import { getMoiveActors } from "../../api/tmdb-api";
+import { getMovieRecommendations } from "../../api/tmdb-api";
 import { useQuery } from "react-query";
 import Spinner from '../spinner'
 import Link from "react-scroll/modules/components/Link";
@@ -37,11 +37,11 @@ const useStyles = makeStyles((theme) => ({
  
 }));
 
-const TemplateMovieActorsPage = ({ movie, children }) => {
+const TemplateMovieRecom = ({ movie, children }) => {
   const classes = useStyles();
   const { data , error, isLoading, isError } = useQuery(
-    ["credits", { id: movie.id }],
-    getMoiveActors
+    ["recommendations", { id: movie.id }],
+    getMovieRecommendations
   );
 
   if (isLoading) {
@@ -51,7 +51,7 @@ const TemplateMovieActorsPage = ({ movie, children }) => {
   if (isError) {
     return <h1>{error.message}</h1>;
   }
-  const credits = data.cast
+  const recommendations = data.results
 
 
   return (
@@ -61,15 +61,14 @@ const TemplateMovieActorsPage = ({ movie, children }) => {
         <Grid item xs={10}>
           <div className={classes.gridListRoot}>
             <GridList cellHeight={500} className={classes.gridList} cols={7} >
-              {credits.map((image) => (
-                 <div> <GridListTile key={image.profile_path} className={classes.gridListTile} cols={3}>
+              {recommendations.map((image) => (
+                 <div> <GridListTile key={image.poster_path} className={classes.gridListTile} cols={3}>
                     <img
-                    src={`https://image.tmdb.org/t/p/w300/${image.profile_path}`}
-                    alt={image.profile_path}
+                    src={`https://image.tmdb.org/t/p/w300/${image.poster_path}`}
+                    alt={image.poster_path}
                   />    
                 </GridListTile>
-                <a href={'https://www.themoviedb.org/person/'+ image.id }> {`${image.name}`} </a>
-
+                <a href={'/movies/'+ image.id }> {`${image.title}`} </a>
                  </div> 
               ))}
             </GridList>
@@ -84,4 +83,4 @@ const TemplateMovieActorsPage = ({ movie, children }) => {
   );
 };
 
-export default TemplateMovieActorsPage;
+export default TemplateMovieRecom;

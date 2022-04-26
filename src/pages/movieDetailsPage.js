@@ -6,8 +6,8 @@ import TemplateMovieActorsPage from "../components/templateMoiveActorsPage";
 import useMovie from "../hooks/useMovie";
 import { getMovie } from '../api/tmdb-api'
 import { useQuery } from "react-query";
-import Spinner from '../components/spinner'
-
+import Spinner from '../components/spinner';
+import TemplateMovieRecom from "../components/templateMoiveRecommendations"
 //moive info page
 const MovieDetailsPage = (props) => {
   const { id } = useParams();
@@ -36,6 +36,8 @@ const MovieDetailsPage = (props) => {
           </PageTemplate> 
           <TemplateMovieActorsPage movie={movie}>
           </TemplateMovieActorsPage>
+          <TemplateMovieRecom movie={movie}>
+          </TemplateMovieRecom>
         </>
       ) : (
         <p>Waiting for movie details</p>
