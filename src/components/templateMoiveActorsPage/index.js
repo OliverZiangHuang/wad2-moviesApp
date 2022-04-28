@@ -68,7 +68,7 @@ const TemplateMovieActorsPage = ({ movie, children }) => {
                     alt={image.profile_path}
                   />    
                 </GridListTile>
-                <a href={'https://www.themoviedb.org/person/'+ image.id }> {`${image.name}`} </a>
+                <a href={'/person/'+ image.id }> {`${image.name}`} </a>
 
                  </div> 
               ))}
