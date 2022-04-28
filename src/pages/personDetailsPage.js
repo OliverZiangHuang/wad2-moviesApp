@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import personDetails from "../components/personDetails";
+import PersonDetails from "../components/personDetails";
 import PageTemplate from "../components/TemplatePersonPage";//here to ajust postions
 import { useQuery } from "react-query";
 import Spinner from '../components/spinner';
@@ -29,8 +29,8 @@ const PersonDetailsPage = (props) => {
       {person ? (
         <>
           <PageTemplate person={person}>
-            <personDetails person={person}>    
-            </personDetails>
+            <PersonDetails person={person}>    
+            </PersonDetails>
           </PageTemplate> 
 
         </>

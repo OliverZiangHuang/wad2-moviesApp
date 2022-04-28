@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
 const TemplatePersonPage = ({ person, children }) => {
   const classes = useStyles();
   const { data , error, isLoading, isError } = useQuery(
-    ["images", { person_id: person.person_id }],
+    ["images", { person_id: person.id }],
     getPersonImages
   );
 
@@ -38,7 +38,7 @@ const TemplatePersonPage = ({ person, children }) => {
   if (isError) {
     return <h1>{error.message}</h1>;
   }
-  const images = data.profile_path 
+  const images = data.profiles 
 
 
   return (
