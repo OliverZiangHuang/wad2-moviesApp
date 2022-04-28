@@ -11,10 +11,10 @@ import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import { getGenres } from "../../api/tmdb-api";
 import { useQuery } from "react-query";
-import Spinner from '../spinner'
+import Spinner from '../spinner';
+
 
 // 
-
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 345,

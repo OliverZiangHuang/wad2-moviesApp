@@ -9,6 +9,7 @@ import MovieFilterUI, {
   genreFilter,
 } from "../components/movieFilterUI";
 import AddToFavouritesIcon from '../components/cardIcons/addToFavourites'
+import Pagination from "./Pagination";
 
 const titleFiltering = {
   name: "title",
@@ -65,6 +66,11 @@ const HomePage = (props) => {
         titleFilter={filterValues[0].value}
         genreFilter={filterValues[1].value}
       />
+      <Pagination
+        data={this.props.data}
+        nextPage={this.handleNextPage}
+        prevPage={this.handlePrevPage}
+        />
     </>
   );
 };
