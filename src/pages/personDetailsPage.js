@@ -5,6 +5,7 @@ import PageTemplate from "../components/TemplatePersonPage";//here to ajust post
 import { useQuery } from "react-query";
 import Spinner from '../components/spinner';
 import { getPerson } from "../api/tmdb-api";
+import TemplatePersonMoivespage from "../components/TemplatePersonMoivespage";
 //import TemplateMovieRecom from "../components/templateMoiveRecommendations"
 //moive info page
 const PersonDetailsPage = (props) => {
@@ -32,6 +33,9 @@ const PersonDetailsPage = (props) => {
             <PersonDetails person={person}>    
             </PersonDetails>
           </PageTemplate> 
+
+          <TemplatePersonMoivespage person={person}>
+          </TemplatePersonMoivespage>
 
         </>
       ) : (
