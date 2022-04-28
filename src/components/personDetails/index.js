@@ -40,8 +40,8 @@ const PersonDetails = ( { person }) => {
   
   return (
     <>
-      <Typography variant="h5" component="h3">
-        Overview
+      <Typography variant="h2" component="h3">
+        {person.name}  
       </Typography>
 
       <Typography variant="h6" component="p">

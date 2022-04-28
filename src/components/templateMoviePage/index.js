@@ -16,6 +16,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexWrap: "wrap",
     justifyContent: "space-around",
+    
   },
   gridList: {
     width: 450,

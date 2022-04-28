@@ -14,11 +14,12 @@ import MovieReviews from '../movieReviews';
 
 
 const useStyles = makeStyles((theme) => ({
+  
   chipRoot: {
-    display: "flex",
+    display: "left",
     flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: "left",
+    alignItems: "left",
     flexWrap: "wrap",
     listStyle: "none",
     padding: theme.spacing(1.5),
@@ -49,8 +50,8 @@ const MovieDetails = ( { movie }) => {
   
   return (
     <>
-      <Typography variant="h5" component="h3">
-        Overview
+      <Typography variant="h3" component="h3">
+      Overview
       </Typography>
 
       <Typography variant="h6" component="p">
@@ -69,7 +70,7 @@ const MovieDetails = ( { movie }) => {
       </Paper>
 
      {/*for Spoken languages, 0413*/} 
-      <Paper component="ul" className={classes.chipSet}>
+      <Paper component="ul" className={classes.chipSet} >
         <li>
           <Chip label="Spoken languages" className={classes.chipLabel} color="primary" />
         </li>

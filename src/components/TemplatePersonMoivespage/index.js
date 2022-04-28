@@ -21,6 +21,8 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexWrap: "wrap",
     justifyContent: "space-around",
+    paddingLeft: theme.spacing(30),
+
   },
   gridList: {
     flexWrap: 'nowrap',
@@ -34,6 +36,12 @@ const useStyles = makeStyles((theme) => ({
     background:
       'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
   },
+  templateTitle: {
+    fontSize: 30,
+    justifyContent: "left",
+    alignItems: "left",
+  },
+ 
  
 }));
 
@@ -56,7 +64,9 @@ const TemplatePersonMoivespage = ({ person, children }) => {
 
   return (
     <div className={classes.root}>
-
+    <li className={classes.templateTitle}>
+        Cast/Crew also in: 
+      </li>
       <Grid person={person} container spacing={10} style={{ padding: "15px" }}>
         <Grid item xs={10}>
           <div className={classes.gridListRoot}>

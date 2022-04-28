@@ -20,7 +20,10 @@ const useStyles = makeStyles((theme) => ({
   gridListRoot: {
     display: "flex",
     flexWrap: "wrap",
-    justifyContent: "space-around",
+    justifyContent: "center",
+    alignItems: "center",
+    paddingLeft: theme.spacing(30),
+
   },
   gridList: {
     flexWrap: 'nowrap',
@@ -33,6 +36,9 @@ const useStyles = makeStyles((theme) => ({
   titleBar: {
     background:
       'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
+  },
+  templateTitle: {
+    fontSize: 30,
   },
  
 }));
@@ -56,11 +62,13 @@ const TemplateMovieRecom = ({ movie, children }) => {
 
   return (
     <div className={classes.root}>
-
+      <li className={classes.templateTitle}>
+        Recommendations based on this movie
+      </li>
       <Grid movie={movie} container spacing={10} style={{ padding: "15px" }}>
         <Grid item xs={10}>
           <div className={classes.gridListRoot}>
-            <GridList cellHeight={500} className={classes.gridList} cols={7} >
+            <GridList cellHeight={500} className={classes.gridList} cols={6} >
               {recommendations.map((image) => (
                  <div> <GridListTile key={image.poster_path} className={classes.gridListTile} cols={3}>
                     <img
