@@ -9,7 +9,7 @@ import TextField from "@material-ui/core/TextField";
 import SearchIcon from "@material-ui/icons/Search";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-import { getGenres } from "../../api/tmdb-api";
+import { getGenres, getMovie, getMovies } from "../../api/tmdb-api";
 import { useQuery } from "react-query";
 import Spinner from '../spinner';
 
@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function FilterMoviesCard(props) {
   const classes = useStyles();
-  const { data, error, isLoading, isError } = useQuery("genres", getGenres);
+  const { data, error, isLoading, isError } = useQuery("genres", getGenres)
 
   if (isLoading) {
     return <Spinner />;
@@ -39,6 +39,7 @@ export default function FilterMoviesCard(props) {
   if (isError) {
     return <h1>{error.message}</h1>;
   }
+
   const genres = data.genres;
   if (genres[0].name !== "All") {
     genres.unshift({ id: "0", name: "All" });
@@ -53,9 +54,14 @@ export default function FilterMoviesCard(props) {
     handleUserImput(e, "title", e.target.value);
   };
 
+  const handleOriginal_titleChange = (e, props) => {
+    handleUserImput(e, "release_date", e.target.value);
+  };
+
   const handleGenreChange = (e) => {
     handleUserImput(e, "genre", e.target.value);
   };
+
 
   return (
     <>
@@ -74,6 +80,17 @@ export default function FilterMoviesCard(props) {
       variant="filled"
       onChange={handleTextChange}
     />
+
+         <TextField
+      className={classes.formControl}
+      id="filled-search"
+      label="Search year"
+      type="search"
+      value={props.original_titleFilter}
+      variant="filled"
+      onChange={handleOriginal_titleChange}
+        />
+
         <FormControl className={classes.formControl}>
           <InputLabel id="genre-label">Genre</InputLabel>
           <Select
@@ -90,6 +107,7 @@ export default function FilterMoviesCard(props) {
               );
             })}
           </Select>
+
         </FormControl>
       </CardContent>
     </Card>

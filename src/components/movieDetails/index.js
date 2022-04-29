@@ -69,6 +69,16 @@ const MovieDetails = ( { movie }) => {
         ))}
       </Paper>
 
+      <Paper component="ul" className={classes.chipSet} >
+        <li>
+          <Chip label="Countries" className={classes.chipLabel} color="primary" />
+        </li>
+        {movie.production_countries.map((c) => (
+          <li key={c.name}>
+            <Chip label={c.name} className={classes.chip} />
+          </li>
+        ))}
+      </Paper>
      {/*for Spoken languages, 0413*/} 
       <Paper component="ul" className={classes.chipSet} >
         <li>
@@ -80,7 +90,7 @@ const MovieDetails = ( { movie }) => {
           </li>
         ))}
       </Paper>
-
+      
  {/*for same, 0413 
  <Paper component="ul" className={classes.chipSet}>
         <li>

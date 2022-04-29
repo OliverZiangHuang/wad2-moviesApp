@@ -7,6 +7,7 @@ import useFiltering from "../hooks/useFiltering";
 import MovieFilterUI, {
   titleFilter,
   genreFilter,
+  original_titleFilter,
 } from "../components/movieFilterUI";
 import AddToFavouritesIcon from '../components/cardIcons/addToFavourites'
 import Pagination from "./Pagination";
@@ -16,6 +17,12 @@ const titleFiltering = {
   value: "",
   condition: titleFilter,
 };
+const original_titleFiltering = {
+  name: "original_title",
+  value: "",
+  condition: original_titleFilter,
+};
+
 const genreFiltering = {
   name: "genre",
   value: "0",
@@ -26,7 +33,7 @@ const HomePage = (props) => {
   const { data, error, isLoading, isError } = useQuery("discover", getMovies);
   const { filterValues, setFilterValues, filterFunction } = useFiltering(
     [],
-    [titleFiltering, genreFiltering]
+    [titleFiltering, genreFiltering, original_titleFiltering]
   );
 
   if (isLoading) {
@@ -64,13 +71,16 @@ const HomePage = (props) => {
       <MovieFilterUI
         filterInputChange={changeFilterValues}
         titleFilter={filterValues[0].value}
+        original_titleFilter= {filterValues[0].value}
         genreFilter={filterValues[1].value}
       />
-      <Pagination
+   {/*
+   <Pagination
         data={this.props.data}
         nextPage={this.handleNextPage}
         prevPage={this.handlePrevPage}
         />
+   */}
     </>
   );
 };

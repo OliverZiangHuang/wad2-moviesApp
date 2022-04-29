@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 //title = page name
-function MovieListPageTemplate({ movies, title, action }) {
+function MovieListPageTemplate({ movies, title, release_date, action }) {
 
   const classes = useStyles();
   return (
@@ -20,6 +20,7 @@ function MovieListPageTemplate({ movies, title, action }) {
         <Grid container >
           <Grid item xs={12}>
             <Header title={title} />
+            <Header release_date={release_date} />
           </Grid>
           <Grid item container spacing={5}>
           <MovieList action={action} movies={movies} />
