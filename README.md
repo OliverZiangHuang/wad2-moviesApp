@@ -12,7 +12,7 @@ The above endpoints are all used in the project for (template) pages.
 
 In addition, the multi-condition search and pagination functions are not completed, and the running display cannot be performed.
 
-5个部分的具体实现如下所示。  
+The specific implementation of the 5 parts is shown below. Video demo link: https://www.youtube.com/watch?v=vax3bbUeV5g.
 ## 1-Toprated movie  
 ![1651249531(1)](https://user-images.githubusercontent.com/91920008/165985461-99131f5b-31b6-43d9-a2b8-5c6b37d82463.png)
 ## 2-Movie actor  
