@@ -1,10 +1,10 @@
-import React from "react"; //{ useState, useEffect }
-import MovieHeader from "../headerMovie";
+import React from "react";
+
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
-import { getMovieImages } from "../../api/tmdb-api";
+import { getTvImages } from "../../api/tmdb-api";
 import { useQuery } from "react-query";
 import Spinner from '../spinner'
 
@@ -23,11 +23,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const TemplateMoviePage = ({ movie, children }) => {
+const TemplateTVPage = ({ movie, children }) => {
   const classes = useStyles();
   const { data , error, isLoading, isError } = useQuery(
-    ["images", { id: movie.id }],
-    getMovieImages
+    ["imagestv", { id: movie.id }],
+    getTvImages
   );
 
   if (isLoading) {
@@ -41,7 +41,6 @@ const TemplateMoviePage = ({ movie, children }) => {
 
   return (
     <div className={classes.root}>
-      <MovieHeader movie={movie} />
 
       <Grid container spacing={5} style={{ padding: "15px" }}>
         <Grid item xs={3}>
@@ -67,4 +66,4 @@ const TemplateMoviePage = ({ movie, children }) => {
   );
 };
 
-export default TemplateMoviePage;
+export default TemplateTVPage;

@@ -4,6 +4,7 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 
+
 const useStyles = makeStyles((theme) => ({
   chipRoot: {
     display: "left",
@@ -37,20 +38,20 @@ const useStyles = makeStyles((theme) => ({
 const PersonDetails = ( { person }) => {
   const classes = useStyles();
   const [drawerOpen, setDrawerOpen] = useState(false); // New
-  
+
   return (
     <>
-      <Typography variant="h2" component="h3">
-        {person.name}  
+      <Typography variant="h5" component="h3">
+        Overview
       </Typography>
 
       <Typography variant="h6" component="p">
         {person.biography}
       </Typography>
       <div className={classes.chipRoot}>
-      
+
       <Paper component="ul" className={classes.chipSet}>
-        <li>
+      <li>
           <Chip label={`Name: ${person.name}`} className={classes.chipLabel} color="primary" />
         </li>
       </Paper>
@@ -58,21 +59,20 @@ const PersonDetails = ( { person }) => {
       <Paper component="ul" className={classes.chipSet}>
         <li>
           <Chip label={`Birthday: ${person.birthday}`} className={classes.chipLabel} color="primary" />
-        </li>
+        </li>       
       </Paper>
-      
+
       <Paper component="ul" className={classes.chipSet}>
         <li>
-          <Chip label={`Place of birth: ${person.place_of_birth}`} className={classes.chipLabel} color="primary" />
+        <Chip label={`Place of birth: ${person.place_of_birth}`} className={classes.chipLabel} color="primary" />
         </li>
       </Paper>
 
       <Paper component="ul" className={classes.chipSet}>
         <li>
           <Chip label={`Known for department: ${person.known_for_department}`} className={classes.chipLabel} color="primary" />
-        </li>
+        </li>          
       </Paper>
-
 
       <Paper component="ul" className={classes.chipSet}>
         <li>
@@ -82,14 +82,11 @@ const PersonDetails = ( { person }) => {
 
       <Paper component="ul" className={classes.chipSet}>
         <li>
-          <Chip   label="Homepage: " link={`Homepage: ${person.homepage}`} className={classes.chipLabel} color="primary" />
+        <Chip   label="Homepage: " link={`Homepage: ${person.homepage}`} className={classes.chipLabel} color="primary" />
         </li>
       </Paper>
-
-
       </div>
-
     </>
   );
 };
-export default  PersonDetails ;
+export default  PersonDetails ; 

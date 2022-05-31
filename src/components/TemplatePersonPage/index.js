@@ -21,13 +21,13 @@ const useStyles = makeStyles((theme) => ({
     width: 450,
     height: '100vh',
   },
- 
+
 }));
 
 const TemplatePersonPage = ({ person, children }) => {
   const classes = useStyles();
   const { data , error, isLoading, isError } = useQuery(
-    ["images", { person_id: person.id }],
+    ["images", { person_id: person.person.id }],
     getPersonImages
   );
 
@@ -38,12 +38,12 @@ const TemplatePersonPage = ({ person, children }) => {
   if (isError) {
     return <h1>{error.message}</h1>;
   }
-  const images = data.profiles 
+  const images = data.profiles
 
 
   return (
     <div className={classes.root}>
-         
+
 
       <Grid container spacing={5} style={{ padding: "15px" }}>
         <Grid item xs={3}>
@@ -53,7 +53,7 @@ const TemplatePersonPage = ({ person, children }) => {
                 <GridListTile key={image.file_path} className={classes.gridListTile} cols={1}>
                   <img
                     src={`https://image.tmdb.org/t/p/w500/${image.file_path}`}
-                   
+
                   />
                 </GridListTile>
               ))}
@@ -70,4 +70,4 @@ const TemplatePersonPage = ({ person, children }) => {
   );
 };
 
-export default TemplatePersonPage;
+export default TemplatePersonPage; 

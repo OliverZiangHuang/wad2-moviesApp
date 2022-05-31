@@ -1,13 +1,15 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import PersonDetails from "../components/personDetails";
-import PageTemplate from "../components/TemplatePersonPage";//here to ajust postions
+import PageTemplate from "../components/templatePersonPage";//here to ajust postions
 import { useQuery } from "react-query";
 import Spinner from '../components/spinner';
 import { getPerson } from "../api/tmdb-api";
-import TemplatePersonMoivespage from "../components/TemplatePersonMoivespage";
+import PersonMoviespage from "../components/templatePersonMoviesPage";
+
 //import TemplateMovieRecom from "../components/templateMoiveRecommendations"
 //moive info page
+
 const PersonDetailsPage = (props) => {
   const { person_id } = useParams();
 
@@ -34,8 +36,9 @@ const PersonDetailsPage = (props) => {
             </PersonDetails>
           </PageTemplate> 
 
-          <TemplatePersonMoivespage person={person}>
-          </TemplatePersonMoivespage>
+          <PersonMoviespage person={person}>
+          </PersonMoviespage>
+
 
         </>
       ) : (

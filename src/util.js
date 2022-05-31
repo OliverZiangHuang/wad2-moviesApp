@@ -6,11 +6,3 @@ export function excerpt(string) {
     separator: /,?\.* +/, // separate by spaces, including preceding commas and periods
   });
 }
-
-export function getYear (date) {
-  if (date !== "" && date !== isNaN) {
-      const d = new Date(date)
-      return d.getFullYear()
-  }
-  return ''
-}

@@ -1,8 +1,8 @@
-import React from "react";
+import React, {useState}  from "react";
 import PageTemplate from "../components/templateMovieListPage";
 import { useQuery } from "react-query";
 import Spinner from "../components/spinner";
-import { getUpComings } from "../api/tmdb-api";
+import { getUpcomingMovies } from "../api/movie-api";
 import useFiltering from "../hooks/useFiltering";
 import MovieFilterUI, {
   titleFilter,
@@ -21,8 +21,9 @@ const genreFiltering = {
   condition: genreFilter,
 };
 
-const Upcomingpage = (props) => {
-  const { data, error, isLoading, isError } = useQuery("upcoming", getUpComings);
+const UpcomingMoviesPage = (props) => {
+  const [pageNo, setPageNo] = useState(1);
+  const { data, error, isLoading, isError } = useQuery(["upcoming",[pageNo]],() =>  getUpcomingMovies(pageNo));
   const { filterValues, setFilterValues, filterFunction } = useFiltering(
     [],
     [titleFiltering, genreFiltering]
@@ -44,12 +45,8 @@ const Upcomingpage = (props) => {
   };
 
   const movies = data ? data.results : [];
+  //console.log(movies)
   const displayedMovies = filterFunction(movies);
-
-  // Redundant, but necessary to avoid app crashing. The lines below can be deleted now.
-  //const favourites = movies.filter((m) => m.favorite);
-  //localStorage.setItem("favourites", JSON.stringify(favourites));
-  //const addToFavourites = (movieId) => true;
 
   return (
     <>
@@ -65,8 +62,15 @@ const Upcomingpage = (props) => {
         titleFilter={filterValues[0].value}
         genreFilter={filterValues[1].value}
       />
+      <button onClick={()=> {
+        setPageNo(pageNo-1)
+      }}>PREV</button>
+      <label>{pageNo}</label>
+      <button onClick={()=>{
+        setPageNo(pageNo+1);
+      }}>NEXT</button>
     </>
   );
 };
 
-export default Upcomingpage;
+export default UpcomingMoviesPage; 

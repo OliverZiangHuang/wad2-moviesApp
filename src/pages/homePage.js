@@ -1,28 +1,20 @@
-import React from "react";
+import React, {useState} from "react";
 import PageTemplate from "../components/templateMovieListPage";
 import { useQuery } from "react-query";
 import Spinner from "../components/spinner";
-import { getMovies } from "../api/tmdb-api";
+import { getMovies } from "../api/movie-api";
 import useFiltering from "../hooks/useFiltering";
 import MovieFilterUI, {
   titleFilter,
   genreFilter,
-  original_titleFilter,
 } from "../components/movieFilterUI";
 import AddToFavouritesIcon from '../components/cardIcons/addToFavourites'
-import Pagination from "./Pagination";
 
 const titleFiltering = {
   name: "title",
   value: "",
   condition: titleFilter,
 };
-const original_titleFiltering = {
-  name: "original_title",
-  value: "",
-  condition: original_titleFilter,
-};
-
 const genreFiltering = {
   name: "genre",
   value: "0",
@@ -30,10 +22,14 @@ const genreFiltering = {
 };
 
 const HomePage = (props) => {
-  const { data, error, isLoading, isError } = useQuery("discover", getMovies);
+
+  const [pageNo, setPageNo] = useState(1);
+  //localStorage.setItem('favourites', JSON.stringify(favourites))
+
+  const { data, error, isLoading, isError } = useQuery(["discover",[pageNo]],() => getMovies(pageNo));
   const { filterValues, setFilterValues, filterFunction } = useFiltering(
     [],
-    [titleFiltering, genreFiltering, original_titleFiltering]
+    [titleFiltering, genreFiltering]
   );
 
   if (isLoading) {
@@ -54,10 +50,10 @@ const HomePage = (props) => {
   const movies = data ? data.results : [];
   const displayedMovies = filterFunction(movies);
 
-  // Redundant, but necessary to avoid app crashing. The lines below can be deleted now.
-  //const favourites = movies.filter((m) => m.favorite);
-  //localStorage.setItem("favourites", JSON.stringify(favourites));
-  //const addToFavourites = (movieId) => true;
+  // Redundant, but necessary to avoid app crashing.
+  // const favourites = movies.filter((m) => m.favorite);
+  // localStorage.setItem("favourites", JSON.stringify(favourites));
+  // const addToFavourites = (movieId) => true;
 
   return (
     <>
@@ -71,16 +67,15 @@ const HomePage = (props) => {
       <MovieFilterUI
         filterInputChange={changeFilterValues}
         titleFilter={filterValues[0].value}
-        original_titleFilter= {filterValues[0].value}
         genreFilter={filterValues[1].value}
       />
-   {/*
-   <Pagination
-        data={this.props.data}
-        nextPage={this.handleNextPage}
-        prevPage={this.handlePrevPage}
-        />
-   */}
+      <button onClick={()=> {
+        setPageNo(pageNo-1)
+      }}>PREV</button>
+      <label>{pageNo}</label>
+      <button onClick={()=>{
+        setPageNo(pageNo+1);
+      }}>NEXT</button>
     </>
   );
 };

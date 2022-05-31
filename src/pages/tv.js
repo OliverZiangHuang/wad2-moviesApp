@@ -1,15 +1,14 @@
-import React, {useState} from "react";
-import PageTemplate from "../components/templateMovieListPage";
+import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import Spinner from "../components/spinner";
-import { getTopratedmoives} from "../api/tmdb-api";
+import { getTv } from "../api/tmdb-api";
 import useFiltering from "../hooks/useFiltering";
 import MovieFilterUI, {
   titleFilter,
   genreFilter,
 } from "../components/movieFilterUI";
-import AddToFavouritesIcon from '../components/cardIcons/addToFavourites'
 
+import TVListPageTemplate from "../components/templateTvList";
 const titleFiltering = {
   name: "title",
   value: "",
@@ -21,13 +20,14 @@ const genreFiltering = {
   condition: genreFilter,
 };
 
-const Topratedpage = (props) => {
-  const [pageNo, setPageNo] = useState(1);
-  const { data, error, isLoading, isError } = useQuery(["Toprated",[pageNo]],() => getTopratedmoives(pageNo));
+const DiscoverTvPage = (props) => {
+ const [page, setPage] =useState(1)
   const { filterValues, setFilterValues, filterFunction } = useFiltering(
     [],
     [titleFiltering, genreFiltering]
   );
+
+  const { data, error, isLoading, isError } = useQuery(["discovertv",page], getTv);
 
   if (isLoading) {
     return <Spinner />;
@@ -45,32 +45,20 @@ const Topratedpage = (props) => {
   };
 
   const movies = data ? data.results : [];
-  const displayedMovies = filterFunction(movies);
+  console.log(movies)
+  const displayedMovies = (movies);
 
-  
   return (
     <>
-      <PageTemplate
-        title="Top Rated Movies"
+      <TVListPageTemplate
+        title="Discover TV"
         movies={displayedMovies}
         action={(movie) => {
-          return <AddToFavouritesIcon movie={movie} />
         }}
       />
-      <MovieFilterUI
-        filterInputChange={changeFilterValues}
-        titleFilter={filterValues[0].value}
-        genreFilter={filterValues[1].value}
-      />
-      <button onClick={()=> {
-        setPageNo(pageNo-1)
-      }}>PREV</button>
-      <label>{pageNo}</label>
-      <button onClick={()=>{
-        setPageNo(pageNo+1);
-      }}>NEXT</button>
-    </>
+   
+   </>
   );
 };
 
-export default Topratedpage;
+  export default DiscoverTvPage;

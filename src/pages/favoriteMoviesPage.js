@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import PageTemplate from "../components/templateMovieListPage";
 import { MoviesContext } from "../contexts/moviesContext";
 import { useQueries } from "react-query";
-import { getMovie } from "../api/tmdb-api";
+import { getMovie } from "../api/movie-api";
 import Spinner from "../components/spinner";
 import useFiltering from "../hooks/useFiltering";
 import MovieFilterUI, { titleFilter } from "../components/movieFilterUI";
@@ -14,7 +14,6 @@ const titleFiltering = {
   value: "",
   condition: titleFilter,
 };
-
 export const genreFiltering = {
   name: "genre",
   value: "0",
@@ -52,6 +51,8 @@ const FavouriteMoviesPage = () => {
   const displayMovies = allFavourites
     ? filterFunction(allFavourites)
     : [];
+
+  //const toDo = () => true;
 
   const changeFilterValues = (type, value) => {
     const newf = { name: type, value: value };

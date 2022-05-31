@@ -4,10 +4,11 @@ import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
-import { getMovieRecommendations } from "../../api/tmdb-api";
+import { getMoiveActors } from "../../api/tmdb-api";
 import { useQuery } from "react-query";
 import Spinner from '../spinner'
 import Link from "react-scroll/modules/components/Link";
+
 
 const useStyles = makeStyles((theme) => ({
    root: {
@@ -20,10 +21,7 @@ const useStyles = makeStyles((theme) => ({
   gridListRoot: {
     display: "flex",
     flexWrap: "wrap",
-    justifyContent: "center",
-    alignItems: "center",
-    paddingLeft: theme.spacing(30),
-
+    justifyContent: "space-around",
   },
   gridList: {
     flexWrap: 'nowrap',
@@ -37,17 +35,14 @@ const useStyles = makeStyles((theme) => ({
     background:
       'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
   },
-  templateTitle: {
-    fontSize: 30,
-  },
- 
+
 }));
 
-const TemplateMovieRecom = ({ movie, children }) => {
+const TemplateMovieActorsPage = ({ movie, children }) => {
   const classes = useStyles();
   const { data , error, isLoading, isError } = useQuery(
-    ["recommendations", { id: movie.id }],
-    getMovieRecommendations
+    ["credits", { id: movie.id }],
+    getMoiveActors
   );
 
   if (isLoading) {
@@ -57,26 +52,26 @@ const TemplateMovieRecom = ({ movie, children }) => {
   if (isError) {
     return <h1>{error.message}</h1>;
   }
-  const recommendations = data.results
+  const credits = data.cast
 
 
   return (
     <div className={classes.root}>
-      <li className={classes.templateTitle}>
-        Recommendations based on this movie
-      </li>
+
       <Grid movie={movie} container spacing={10} style={{ padding: "15px" }}>
         <Grid item xs={10}>
           <div className={classes.gridListRoot}>
-            <GridList cellHeight={500} className={classes.gridList} cols={6} >
-              {recommendations.map((image) => (
-                 <div> <GridListTile key={image.poster_path} className={classes.gridListTile} cols={3}>
-                    <img
-                    src={`https://image.tmdb.org/t/p/w300/${image.poster_path}`}
-                    alt={image.poster_path}
-                  />    
+            <GridList cellHeight={500} className={classes.gridList} cols={7} >
+              {credits.map((image) => (
+                <div><GridListTile key={image.profile_path} className={classes.gridListTile} cols={3}>
+                  <img
+                    src={`https://image.tmdb.org/t/p/w300/${image.profile_path}`}
+                    alt={image.profile_path}
+                                    
+                  />
+                  
                 </GridListTile>
-                <a href={'/movies/'+ image.id }> {`${image.title}`} </a>
+                <a href={'/person/'+ image.id }> {`${image.name}`} </a>
                  </div> 
               ))}
             </GridList>
@@ -91,4 +86,4 @@ const TemplateMovieRecom = ({ movie, children }) => {
   );
 };
 
-export default TemplateMovieRecom;
+export default TemplateMovieActorsPage;

@@ -1,16 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Chip from "@material-ui/core/Chip";
 import Paper from "@material-ui/core/Paper";
-import AccessTimeIcon from "@material-ui/icons/AccessTime";
-import MonetizationIcon from "@material-ui/icons/MonetizationOn";
+
 import StarRate from "@material-ui/icons/StarRate";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-// New
-import NavigationIcon from "@material-ui/icons/Navigation";
-import Fab from "@material-ui/core/Fab";
-import Drawer from "@material-ui/core/Drawer";
-import MovieReviews from '../movieReviews';
 
 const useStyles = makeStyles((theme) => ({
   chipRoot: {
@@ -35,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
   chipLabel: {
     margin: theme.spacing(0.5),
   },
-  fab: {  //New
+  fab: { 
     position: "fixed",
     top: theme.spacing(15),
     right: theme.spacing(2),
@@ -44,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
 
 const MovieDetails = ( {movie}) => {
   const classes = useStyles();
-  const [drawerOpen, setDrawerOpen] = useState(false); // New
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
   return (
     <>
@@ -66,45 +60,23 @@ const MovieDetails = ( {movie}) => {
           </li>
         ))}
       </Paper>
-      
       <Paper component="ul" className={classes.chipSet}>
-        <li>
-          <Chip label="Spoken languages" className={classes.chipLabel} color="primary" />
-        </li>
-        {movie.spoken_languages.map((c) => (
-          <li key={c.name}>
-            <Chip label={c.name} className={classes.chip} />
-          </li>
-        ))}
-      </Paper>
 
+        <Chip label={`Release date: ${movie.first_air_date}`} />
+        <Chip label={`Number of season: ${movie.number_of_seasons}`} />
+        <Chip label={`Number of episode: ${movie.number_of_episodes}`} />
+
+      </Paper>
       <Paper component="ul" className={classes.chipSet}>
-        <Chip icon={<AccessTimeIcon />} label={`${movie.runtime} min.`} />
-        <Chip
-          icon={<MonetizationIcon />}
-          label={`${movie.revenue.toLocaleString()}`}
-        />
         <Chip
           icon={<StarRate />}
-          label={`${movie.vote_average} (${movie.vote_count}`}
-        />
-        <Chip label={`Released: ${movie.release_date}`} />
+          label={`${movie.vote_average}`}
+        /> 
+
       </Paper>
       </div>
-      {/* New */}
-      <Fab    
-        color="secondary"
-        variant="extended"
-        onClick={() =>setDrawerOpen(true)}
-        className={classes.fab}
-      >
-        <NavigationIcon />
-        Reviews
-      </Fab>
-      <Drawer anchor="top" open={drawerOpen} onClose={() => setDrawerOpen(false)}>
-        <MovieReviews movie={movie} />
-      </Drawer>
     </>
   );
 };
+
 export default  MovieDetails ;

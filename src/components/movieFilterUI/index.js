@@ -3,14 +3,9 @@ import Fab from "@material-ui/core/Fab";
 import FilterCard from "../filterMoviesCard";
 import Drawer from "@material-ui/core/Drawer";
 import { makeStyles } from "@material-ui/core/styles";
-import getYear from "../../util";
 
 export const titleFilter = function (movie, value) {
   return movie.title.toLowerCase().search(value.toLowerCase()) !== -1;
-};
-
-export const original_titleFilter = function (movie, value) {
-  return movie.release_date.toLowerCase().search(value.toLowerCase()) !== -1;
 };
 
 export const genreFilter = function (movie, value) {
@@ -30,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MovieFilterUI = ({ filterInputChange, titleFilter, genreFilter, original_titleFilter }) => {
+const MovieFilterUI = ({ filterInputChange, titleFilter, genreFilter }) => {
   const classes = useStyles();
   const [drawerOpen, setDrawerOpen] = useState(false);
 
@@ -52,7 +47,6 @@ const MovieFilterUI = ({ filterInputChange, titleFilter, genreFilter, original_t
         <FilterCard
           onUserInput={filterInputChange}
           titleFilter={titleFilter}
-          original_titleFilter={original_titleFilter}
           genreFilter={genreFilter}
         />
       </Drawer>

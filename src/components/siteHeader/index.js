@@ -1,17 +1,19 @@
-import React, { useState } from "react";
+import React, { useState , useContext} from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import Button from "@material-ui/core/Button";
+
 import MenuIcon from "@material-ui/icons/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import { useHistory } from "react-router-dom";
 import { useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-//website header
+import {AuthContext }from "../../contexts/authContext";
+
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -25,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
 
 const SiteHeader = () => {
   const classes = useStyles();
+  const authcontext = useContext(AuthContext);
   const  history = useHistory()
   const [anchorEl, setAnchorEl] = useState(null);
   const theme = useTheme();
@@ -33,12 +36,41 @@ const SiteHeader = () => {
   const open = Boolean(anchorEl);
   const menuOptions = [
     { label: "Home", path: "/" },
-    { label: "Favorites", path: "/movies/favourites" },
     { label: "Upcoming", path: "/movies/upcoming" },
+    { label: "Favorites", path: "/movies/favourites" },
     { label: "Top Rated Moives", path: "/movies/toprated" },
     { label: "TV", path: "/tv" },
-    { label: "FantasyMovie", path: "/fantasyMoviePage" }     
+    { label: "FantasyMovie", path: "/fantasyMoviePage" },        
   ];
+
+  const logoutprint = () => {
+    if(authcontext != null)
+    {
+      if(authcontext.isAuthenticated)
+      {
+        return  <Button key={"logout"} color="inherit" onClick={() => logout()}>{"logout"}</Button>
+      }
+    }
+  }
+  const loginprint = () => {
+    if(authcontext != null)
+    {
+      if(!authcontext.isAuthenticated)
+      {
+        return  <Button key={"login"} color="inherit" onClick={() => login()}>{"login"}</Button>
+      }
+    }
+  }
+
+  const logout= (e) =>{
+    localStorage.clear(); 
+    if(authcontext != null){
+    authcontext.signout();
+    }
+  }
+  const login= (e) =>{
+    history.push('/login');
+  }
 
   const handleMenuSelect = (pageURL) => {
     history.push(pageURL);
@@ -105,7 +137,10 @@ const SiteHeader = () => {
                 >
                   {opt.label}
                 </Button>
+
               ))}
+              {loginprint()}
+              {logoutprint()}
             </>
           )}
         </Toolbar>

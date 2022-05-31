@@ -11,6 +11,7 @@ import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import { useHistory } from 'react-router-dom'
 
+
 const ratings = [
   {
     value: 5,
@@ -54,11 +55,11 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
   },
   snack: {
-     width: "50%",
-     "& > * ": {
-       width: "100%",
-     },
-   },
+    width: "50%",
+    "& > * ": {
+      width: "100%",
+    },
+  },
 }));
 
 const ReviewForm = ({ movie }) => {
@@ -66,7 +67,7 @@ const ReviewForm = ({ movie }) => {
   const { register, handleSubmit, errors, reset } = useForm();
   const context = useContext(MoviesContext);
   const [rating, setRating] = useState(3);
-  // New code
+  
   const [open, setOpen] = useState(false);  //NEW
   const history = useHistory()
 
@@ -75,16 +76,15 @@ const ReviewForm = ({ movie }) => {
     history.push("/movies/favourites");
   };
 
-  const handleRatingChange = (event) => {
-    setRating(event.target.value);
-  };
-
   const onSubmit = (review) => {
     review.movieId = movie.id;
     review.rating = rating;
-    // console.log(review)  
+    
+    // console.log(review)        For debugging! 
     context.addReview(movie, review);
     setOpen(true);   // NEW
+    context.addRating(movie, rating);
+    setRating(rating); // NEW
   };
 
   return (
@@ -92,6 +92,7 @@ const ReviewForm = ({ movie }) => {
       <Typography component="h2" variant="h3">
         Write a review
       </Typography>
+
       <Snackbar
         className={classes.snack}
         anchorOrigin={{ vertical: "top", horizontal: "right" }}
@@ -108,6 +109,7 @@ const ReviewForm = ({ movie }) => {
           </Typography>
         </MuiAlert>
       </Snackbar>
+      
       <form
         className={classes.form}
         onSubmit={handleSubmit(onSubmit)}
@@ -150,13 +152,14 @@ const ReviewForm = ({ movie }) => {
             {errors.content.message}
           </Typography>
         )}
+
         <TextField
           id="select-rating"
           select
           variant="outlined"
           label="Rating Select"
           value={rating}
-          onChange={handleRatingChange}
+          //onChange={handleRatingChange}
           helperText="Don't forget your rating"
         >
           {ratings.map((option) => (

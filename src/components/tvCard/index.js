@@ -1,4 +1,4 @@
-import React , { useContext  } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
@@ -15,7 +15,6 @@ import Grid from "@material-ui/core/Grid";
 import Avatar from "@material-ui/core/Avatar";
 import { MoviesContext } from "../../contexts/moviesContext";
 
-
 const useStyles = makeStyles({
   card: { maxWidth: 345 },
   media: { height: 500 },
@@ -24,17 +23,16 @@ const useStyles = makeStyles({
   },
 });
 
-export default function MovieCard({ movie, action }) {
+export default function TVCard({ movie, action }) {
   const classes = useStyles();
-  const { favourites} = useContext(MoviesContext);
-
+  const { favourites } = useContext(MoviesContext);
   if (favourites.find((id) => id === movie.id)) {
     movie.favourite = true;
   } else {
     movie.favourite = false
   }
 
-  
+
   return (
     <Card className={classes.card}>
       <CardHeader
@@ -48,15 +46,15 @@ export default function MovieCard({ movie, action }) {
       }
       title={
         <Typography variant="h5" component="p">
-          {movie.title}{" "}
+          {movie.original_name}{" "}
         </Typography>
       }
     />
       <CardMedia
         className={classes.media}
         image={
-          movie.poster_path
-            ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
+          movie.backdrop_path
+            ? `https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`
             : `${process.env.PUBLIC_URL}/assets/film-poster-placeholder.png`
         }
       />
@@ -65,7 +63,7 @@ export default function MovieCard({ movie, action }) {
           <Grid item xs={6}>
             <Typography variant="h6" component="p">
               <CalendarIcon fontSize="small" />
-              {movie.release_date}
+              {movie.first_air_date}
             </Typography>
           </Grid>
           <Grid item xs={6}>
@@ -77,8 +75,8 @@ export default function MovieCard({ movie, action }) {
         </Grid>
       </CardContent>
       <CardActions disableSpacing>
-      {action(movie)}
-        <Link to={`/movies/${movie.id}`}>
+        {action(movie)}
+        <Link to={`/tv/${movie.id}`}>
         <Button variant="outlined" size="medium" color="primary">
           More Info ...
         </Button>
@@ -87,3 +85,8 @@ export default function MovieCard({ movie, action }) {
     </Card>
   );
 }
+
+
+
+
+
