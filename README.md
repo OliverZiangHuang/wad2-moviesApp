@@ -1,5 +1,5 @@
 # wad2-moviesApp
-
+## Registration, private routing and other functions are in the new brunch: https://github.com/OliverZiangHuang/wad2-moviesApp/tree/loginapp
 This application is only used for assignments in the WIT Enterprise web Development course.
 In addition to the functions completed in the course lab, here are 5 additional endpoints from TMDB (https://developers.themoviedb.org/3)
 ## 5 additional endpoints are:  
