@@ -9,10 +9,11 @@ In addition to the functions completed in the course lab, here are 5 additional 
 -Actor details : api.themoviedb.org/3/person/${person_id}/movie_credits  
 -Actor's movies : api.themoviedb.org/3/person/${person_id} & api.themoviedb.org/3/person/${person_id}/images  
 The above endpoints are all used in the project for (template) pages.
+In the loginapp, we added registration, login verification, and verification of private links.
 
 In addition, the multi-condition search and pagination functions are not completed, and the running display cannot be performed.
 
-The specific implementation of the 5 parts is shown below. Video demo link: https://www.youtube.com/watch?v=vax3bbUeV5g.
+The specific implementation of the 7 parts is shown below. Video demo link: https://www.youtube.com/watch?v=vax3bbUeV5g.
 ## 1-Toprated movie  
 ![1651249531(1)](https://user-images.githubusercontent.com/91920008/165985461-99131f5b-31b6-43d9-a2b8-5c6b37d82463.png)
 ## 2-Movie actor  
@@ -25,11 +26,15 @@ The specific implementation of the 5 parts is shown below. Video demo link: http
 ![1651249696(1)](https://user-images.githubusercontent.com/91920008/165985697-bc4d9e52-e459-4730-9dfc-e8cc0522472e.png)
 
 
-
-
-
-
-
+## 6-Register and log in.  
+In the loginapp, we added registration, login verification, and verification of private links.
+When not logged in, the upcoming interface as a private link cannot be displayed, and a login and registration box will pop up.
+![c4d77df9f567b1c7aa5f36ecffae73b](https://user-images.githubusercontent.com/91920008/171168440-290aef3e-6874-4455-be21-ddd537e1fcf4.png)
+Enter the information in the registration interface and click register. After success, the account will be displayed in the database.
+![fd1a1aa4194469928290b75de2edb0d](https://user-images.githubusercontent.com/91920008/171168477-5f62742d-3b35-4f9b-bb56-4e118f828fc6.png)
+## 7-Enter private routing.  
+After automatically jumping back to the upcoming interface, after logging in, the upcoming interface will be displayed normally, and the login button in the upper right corner will automatically become the logout button.
+![ebc359ee45a3e8dc383ebce9aa2f489](https://user-images.githubusercontent.com/91920008/171168590-2655243f-5a4e-4cc4-ab1c-eedddb40bbec.png)
 
 
 
